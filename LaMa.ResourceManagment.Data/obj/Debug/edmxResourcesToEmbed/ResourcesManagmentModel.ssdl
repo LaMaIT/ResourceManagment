@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LaMa.ResourceManagmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationVersion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicationGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Version" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApplicationStage" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ApplicationVersion_Application">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="ApplicationVersion" Type="Self.ApplicationVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="ApplicationGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LaMaResourceManagmentModelStoreContainer">
+    <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ApplicationVersion" EntityType="Self.ApplicationVersion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ApplicationVersion_Application" Association="Self.FK_ApplicationVersion_Application">
+      <End Role="Application" EntitySet="Application" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

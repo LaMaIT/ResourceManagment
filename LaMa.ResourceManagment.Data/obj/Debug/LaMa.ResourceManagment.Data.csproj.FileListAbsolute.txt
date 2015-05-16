@@ -1,0 +1,10 @@
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\LaMa.ResourceManagment.Data.dll.config
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\LaMa.ResourceManagment.Data.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\LaMa.ResourceManagment.Data.pdb
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\EntityFramework.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\EntityFramework.xml
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\obj\Debug\LaMa.ResourceManagment.Data.csprojResolveAssemblyReference.cache
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\obj\Debug\LaMa.ResourceManagment.Data.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Data\obj\Debug\LaMa.ResourceManagment.Data.pdb

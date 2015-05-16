@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LaMa.ResourceManagmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="ApplicationKey" />
+    </Key>
+    <Property Name="ApplicationKey" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Icon" Type="Binary" MaxLength="256" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FirstReleaseDate" Type="DateTime" Precision="3" />
+    <Property Name="StopSupportDate" Type="DateTime" Precision="3" />
+    <Property Name="HasCentralisedUserManagment" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK_Application_Resource" FromRole="Application" ToRole="Resource" />
+    <NavigationProperty Name="ApplicationVersion" Relationship="Self.FK_ApplicationVersion_Application" FromRole="Application" ToRole="ApplicationVersion" />
+  </EntityType>
+  <EntityType Name="ApplicationVersion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ApplicationKey" Type="Guid" Nullable="false" />
+    <Property Name="AssemblyVersionNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileVersionNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ReleaseDate" Type="DateTime" Precision="3" />
+    <Property Name="StopSupportDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUsedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUsedBy" Type="Guid" />
+    <NavigationProperty Name="Application" Relationship="Self.FK_ApplicationVersion_Application" FromRole="ApplicationVersion" ToRole="Application" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK_ApplicationVersion_Resource" FromRole="ApplicationVersion" ToRole="Resource" />
+  </EntityType>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="ResourceTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Application" Relationship="Self.FK_Application_Resource" FromRole="Resource" ToRole="Application" />
+    <NavigationProperty Name="ApplicationVersion" Relationship="Self.FK_ApplicationVersion_Resource" FromRole="Resource" ToRole="ApplicationVersion" />
+    <NavigationProperty Name="ResourceType" Relationship="Self.FK_Resource_ResourceType" FromRole="Resource" ToRole="ResourceType" />
+  </EntityType>
+  <EntityType Name="ResourceType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK_Resource_ResourceType" FromRole="ResourceType" ToRole="Resource" />
+  </EntityType>
+  <Association Name="FK_Application_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="Application" Type="Self.Application" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicationKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationVersion_Application">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="ApplicationVersion" Type="Self.ApplicationVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="ApplicationKey" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="ApplicationKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationVersion_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+    <End Role="ApplicationVersion" Type="Self.ApplicationVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="LastUsedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ResourceType">
+    <End Role="ResourceType" Type="Self.ResourceType" Multiplicity="1" />
+    <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Resource">
+        <PropertyRef Name="ResourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Application" EntityType="Self.Application" />
+    <EntitySet Name="ApplicationVersion" EntityType="Self.ApplicationVersion" />
+    <EntitySet Name="Resource" EntityType="Self.Resource" />
+    <EntitySet Name="ResourceType" EntityType="Self.ResourceType" />
+    <AssociationSet Name="FK_Application_Resource" Association="Self.FK_Application_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="Application" EntitySet="Application" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationVersion_Application" Association="Self.FK_ApplicationVersion_Application">
+      <End Role="Application" EntitySet="Application" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationVersion_Resource" Association="Self.FK_ApplicationVersion_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ResourceType" Association="Self.FK_Resource_ResourceType">
+      <End Role="ResourceType" EntitySet="ResourceType" />
+      <End Role="Resource" EntitySet="Resource" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

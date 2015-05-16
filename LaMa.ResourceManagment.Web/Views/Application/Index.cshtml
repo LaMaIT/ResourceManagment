@@ -1,0 +1,36 @@
+﻿@using LaMa.ResourceManagment.Web.Models
+@inherits LaMa.Framework.Core.Web.MVCWrappers.WebViewPage<LaMa.ResourceManagment.Web.Models.ApplicationPM,LaMa.ResourceManagment.Web.Models.ApplicationVM>
+@{
+    ViewBag.Title = "Applications";
+}
+
+<h2>Applications</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Application key</th>
+            <th>Icon</th>
+            <th>Application</th>
+            <th>Number of versions</th>
+            <th>is supported</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ApplicationVM.ApplicationItem applicationItem in Model.ApplicationItems)
+        {
+            <tr>
+                <td>@applicationItem.Guid</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(applicationItem.Icon))
+                    {
+                        <img src="@applicationItem.Icon" />
+                    }
+                </td>
+                <td>@applicationItem.Name</td>
+                <td>@applicationItem.NumberOfVersions</td>
+                <td>@applicationItem.IsSupported</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

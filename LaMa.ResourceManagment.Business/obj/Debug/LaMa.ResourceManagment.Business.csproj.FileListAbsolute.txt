@@ -1,0 +1,12 @@
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\LaMa.ResourceManagment.Business.dll.config
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\LaMa.ResourceManagment.Business.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\LaMa.ResourceManagment.Business.pdb
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\EntityFramework.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\EntityFramework.SqlServer.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\LaMa.ResourceManagment.Data.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\LaMa.ResourceManagment.Data.pdb
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\EntityFramework.xml
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\bin\Debug\EntityFramework.SqlServer.xml
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\obj\Debug\LaMa.ResourceManagment.Business.csprojResolveAssemblyReference.cache
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\obj\Debug\LaMa.ResourceManagment.Business.dll
+E:\VS2013\Github\ResourceManagment\LaMa.ResourceManagment.Business\obj\Debug\LaMa.ResourceManagment.Business.pdb

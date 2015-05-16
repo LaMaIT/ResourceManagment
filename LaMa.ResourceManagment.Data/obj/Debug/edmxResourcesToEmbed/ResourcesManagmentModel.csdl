@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LaMa.ResourceManagmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ApplicationVersion" Relationship="LaMa.ResourceManagmentModel.FK_ApplicationVersion_Application" FromRole="Application" ToRole="ApplicationVersion" />
+  </EntityType>
+  <EntityType Name="ApplicationVersion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicationGuid" Type="Guid" Nullable="false" />
+    <Property Name="Version" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApplicationStage" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Application" Relationship="LaMa.ResourceManagmentModel.FK_ApplicationVersion_Application" FromRole="ApplicationVersion" ToRole="Application" />
+  </EntityType>
+  <EntityContainer Name="ResourceMgnmt" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Application" EntityType="Self.Application" />
+    <EntitySet Name="ApplicationVersion" EntityType="Self.ApplicationVersion" />
+    <AssociationSet Name="FK_ApplicationVersion_Application" Association="LaMa.ResourceManagmentModel.FK_ApplicationVersion_Application">
+      <End Role="Application" EntitySet="Application" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_ApplicationVersion_Application">
+    <End Type="LaMa.ResourceManagmentModel.Application" Role="Application" Multiplicity="1" />
+    <End Type="LaMa.ResourceManagmentModel.ApplicationVersion" Role="ApplicationVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="ApplicationGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

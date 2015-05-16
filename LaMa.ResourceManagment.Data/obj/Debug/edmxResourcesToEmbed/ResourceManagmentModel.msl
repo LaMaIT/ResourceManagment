@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LaMaResourceManagmentModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Application">
+      <EntityTypeMapping TypeName="LaMa.ResourceManagmentModel.Application">
+        <MappingFragment StoreEntitySet="Application">
+          <ScalarProperty Name="ApplicationKey" ColumnName="ApplicationKey" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="FirstReleaseDate" ColumnName="FirstReleaseDate" />
+          <ScalarProperty Name="StopSupportDate" ColumnName="StopSupportDate" />
+          <ScalarProperty Name="HasCentralisedUserManagment" ColumnName="HasCentralisedUserManagment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationVersion">
+      <EntityTypeMapping TypeName="LaMa.ResourceManagmentModel.ApplicationVersion">
+        <MappingFragment StoreEntitySet="ApplicationVersion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ApplicationKey" ColumnName="ApplicationKey" />
+          <ScalarProperty Name="AssemblyVersionNumber" ColumnName="AssemblyVersionNumber" />
+          <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="StopSupportDate" ColumnName="StopSupportDate" />
+          <ScalarProperty Name="LastUsedDate" ColumnName="LastUsedDate" />
+          <ScalarProperty Name="LastUsedBy" ColumnName="LastUsedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource">
+      <EntityTypeMapping TypeName="LaMa.ResourceManagmentModel.Resource">
+        <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="ResourceTypeId" ColumnName="ResourceTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourceType">
+      <EntityTypeMapping TypeName="LaMa.ResourceManagmentModel.ResourceType">
+        <MappingFragment StoreEntitySet="ResourceType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

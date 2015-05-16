@@ -1,0 +1,39 @@
+﻿#mainHeader {
+  height: 200px;
+}
+#mainHeader .branding .branding-company h1 {
+  color: #045B53;
+  font-size: 42pt !important;
+  margin-top: 0;
+}
+#mainHeader .branding .branding-application {
+  color: black;
+}
+#loginContainer div p a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  background-color: #045B53;
+  display: inline-block;
+  border: 2px solid #045B53;
+  padding: 10px;
+  border-radius: 0 0 20px 20px;
+  -webkit-opacity: 0.35;
+  -moz-opacity: 0.35;
+  opacity: 0.35;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+#loginContainer div p a:hover {
+  text-decoration: none;
+  opacity: 1;
+}
+#mainContent {
+  background-color: lightgray;
+  border-top: 2px solid gray;
+}
+/*# sourceMappingURL=Layout.css.map */

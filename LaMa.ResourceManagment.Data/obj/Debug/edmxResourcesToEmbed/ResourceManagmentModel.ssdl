@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LaMa.ResourceManagmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="ApplicationKey" />
+    </Key>
+    <Property Name="ApplicationKey" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CodeName" Type="varchar" MaxLength="250" />
+    <Property Name="Icon" Type="varbinary" MaxLength="256" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="FirstReleaseDate" Type="datetime" />
+    <Property Name="StopSupportDate" Type="datetime" />
+    <Property Name="HasCentralisedUserManagment" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationVersion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ApplicationKey" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AssemblyVersionNumber" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="FileVersionNumber" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="ReleaseDate" Type="datetime" />
+    <Property Name="StopSupportDate" Type="datetime" />
+    <Property Name="LastUsedDate" Type="datetime" />
+    <Property Name="LastUsedBy" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ResourceTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ResourceType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Application_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="Application" Type="Self.Application" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicationKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationVersion_Application">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="ApplicationVersion" Type="Self.ApplicationVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="ApplicationKey" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="ApplicationKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationVersion_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+    <End Role="ApplicationVersion" Type="Self.ApplicationVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="LastUsedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resource_ResourceType">
+    <End Role="ResourceType" Type="Self.ResourceType" Multiplicity="1" />
+    <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Resource">
+        <PropertyRef Name="ResourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LaMaResourceManagmentModelStoreContainer">
+    <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ApplicationVersion" EntityType="Self.ApplicationVersion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Application_Resource" Association="Self.FK_Application_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="Application" EntitySet="Application" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationVersion_Application" Association="Self.FK_ApplicationVersion_Application">
+      <End Role="Application" EntitySet="Application" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationVersion_Resource" Association="Self.FK_ApplicationVersion_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resource_ResourceType" Association="Self.FK_Resource_ResourceType">
+      <End Role="ResourceType" EntitySet="ResourceType" />
+      <End Role="Resource" EntitySet="Resource" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
